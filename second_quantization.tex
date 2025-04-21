@@ -1,0 +1,102 @@
+\documentclass{ltjsarticle}
+
+
+%ソースコード
+\usepackage{listings}
+\lstset{
+  numbers=left,
+  basicstyle=\ttfamily,
+}
+%装飾
+\usepackage{color}
+% 数式
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{comment}
+\usepackage{autobreak}
+\usepackage{mathtools}
+\usepackage{mathcommand}
+\mathtoolsset{showonlyrefs=true}
+% 数式処理
+\usepackage{luacas}
+% 画像
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{tikz}
+
+\title{第二量子化　計算}
+\author{Toroid153846}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+  \begin{align}
+    \ket{\bm{r}_1\sigma_1,\dots,\bm{r}_N\sigma_N}&=\frac{1}{\sqrt{N!}}\hat{\psi}_{\sigma_1}^\dag (\bm{r}_1)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}_N)\ket{\rm{vac}} \\
+    \hat{\psi}_\sigma (\bm{r})\ket{\rm{vac}}&=0\\
+    \comm{\hat{\psi}_\sigma(\bm{r})}{\hat{\psi}_{\sigma'}(\bm{r}')}_s&=0\\
+    \comm{\hat{\psi}^\dag_\sigma(\bm{r})}{\hat{\psi}^\dag_{\sigma'}(\bm{r}')}_s&=0\\
+    \comm{\hat{\psi}_\sigma(\bm{r})}{\hat{\psi}^\dag_{\sigma'}(\bm{r}')}_s&=\delta(\bm{r}-\bm{r}')\delta_{\sigma,\sigma'}
+  \end{align}
+を前提として。
+\begin{align}
+  \braket{\bm{r}_1\sigma_1,\dots,\bm{r}_N\sigma_N}{\bm{r}'_1\sigma'_1,\dots,\bm{r}'_{N'}\sigma'_{N'}}=\frac{\delta_{N,N'}}{N!}\sum_P s^P\delta(\bm{r}_1-\bm{r}'_{p_1})\delta_{\sigma_1,\sigma'_{p_1}}\cdots\delta(\bm{r}_N-\bm{r}'_{p_N})\delta_{\sigma_N,\sigma'_{p_N}}
+\end{align}
+を示そう。\\
+まずは$N=N'$の場合について考える。\\
+$P(i_1,\dots,i_K)$は$1,\dots,N$が$i_1,\dots,i_K,1,\dots,\underbrace{}_{i_1,\dots,i_K},\dots,N$になるように並べ替えたときに偶置換で入れ替える場合は0,奇置換で入れ替わる場合は1とした値とする。
+\begin{align}
+  \braket{\bm{r}_1\sigma_1,\dots,\bm{r}_N\sigma_N}{\bm{r}'_1\sigma'_1,\dots,\bm{r}'_{N}\sigma'_{N}}
+  =&\frac{1}{N!} \bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_1}(\bm{r}_1)\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  =&\frac{1}{N!}\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_2}(\bm{r}_2)\delta(\bm{r}_1-\bm{r}'_{1})\delta_{\sigma_1,\sigma'_{1}}\hat{\psi}_{\sigma_2}^\dag (\bm{r}'_2)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  &+\frac{1}{N!}s\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_2}(\bm{r}_2)\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\hat{\psi}_{\sigma_1}(\bm{r}_1)\hat{\psi}_{\sigma_2}^\dag (\bm{r}'_2)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  =&\frac{1}{N!}\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_2}(\bm{r}_2)\delta(\bm{r}_1-\bm{r}'_{1})\delta_{\sigma_1,\sigma'_{1}}\hat{\psi}_{\sigma_2}^\dag (\bm{r}'_2)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  &+\frac{1}{N!}s\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_2}(\bm{r}_2)\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\delta(\bm{r}_1-\bm{r}'_{2})\delta_{\sigma_1,\sigma'_{2}}\hat{\psi}_{\sigma_3}^\dag (\bm{r}'_3)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  &+\frac{1}{N!}s^2\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_2}(\bm{r}_2)\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\hat{\psi}_{\sigma_2}^\dag (\bm{r}'_2)\hat{\psi}_{\sigma_1}(\bm{r}_1)\hat{\psi}^\dag_{\sigma_3}(\bm{r}_3)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  =&\frac{1}{N!}\sum_{i_1}s^{P(i_1)}\delta(\bm{r}_1-\bm{r}'_{i_1})\delta_{\sigma_1,\sigma'_{i_1}}\\
+  &\times\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_2}(\bm{r}_2)\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\cdots\underbrace{}_{i_1}\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  =&\frac{1}{N!}\sum_{i_1\neq i_2}s^{P(i_1,i_2)}\delta(\bm{r}_1-\bm{r}'_{i_1})\delta_{\sigma_1,\sigma'_{i_1}}\delta(\bm{r}_2-\bm{r}'_{i_2})\delta_{\sigma_2,\sigma'_{i_2}}\\
+  &\times\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_3}(\bm{r}_3)\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\cdots\underbrace{}_{i_1,i_2}\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  =&\frac{1}{N!}\sum_P s^P\delta(\bm{r}_1-\bm{r}'_{p_1})\delta_{\sigma_1,\sigma'_{p_1}}\cdots\delta(\bm{r}_N-\bm{r}'_{p_N})\delta_{\sigma_N,\sigma'_{p_N}}\braket{\rm{vac}}{\rm{vac}}\\
+  =&\frac{1}{N!}\sum_P s^P\delta(\bm{r}_1-\bm{r}'_{p_1})\delta_{\sigma_1,\sigma'_{p_1}}\cdots\delta(\bm{r}_N-\bm{r}'_{p_N})\delta_{\sigma_N,\sigma'_{p_N}}
+\end{align}
+てか、交換子の法則を用いればもっと分かりやすく求まりそう。
+\begin{align}
+  \comm{\hat{A}}{\hat{B}_1\cdots\hat{B}_n}_{s^n}=\sum_{i=1}^{n}s^{i-1}\hat{B}_1\cdots\hat{B}_{i-1}\comm{\hat{A}}{\hat{B}_i}_s\hat{B}_{i+1}\cdots\hat{B}_n
+\end{align}
+が成り立つので示す。
+\begin{align}
+  \sum_{i=1}^{n}s^{i-1}\hat{B}_1\cdots\hat{B}_{i-1}\comm{\hat{A}}{\hat{B}_i}_s\hat{B}_{i+1}\cdots\hat{B}_n
+  =&\sum_{i=1}^{n}s^{i-1}\hat{B}_1\cdots\hat{B}_{i-1}\hat{A}\hat{B}_i\cdots\hat{B}_n-\sum_{i=1}^{n}s^{i}\hat{B}_1\cdots\hat{B}_i\hat{A}\hat{B}_{i+1}\cdots\hat{B}_n\\
+  =&\sum_{i=1}^{n}s^{i-1}\hat{B}_1\cdots\hat{B}_{i-1}\hat{A}\hat{B}_i\cdots\hat{B}_n-\sum_{i=2}^{n+1}s^{i-1}\hat{B}_1\cdots\hat{B}_{i-1}\hat{A}\hat{B}_{i}\cdots\hat{B}_n\\
+  =&\hat{A}\hat{B}_1\cdots\hat{B}_n-s^n\hat{B}_1\cdots\hat{B}_n\hat{A}\\
+  =&\comm{\hat{A}}{\hat{B}_1\cdots\hat{B}_n}_{s^n}
+\end{align}
+これを用いて
+\begin{align}
+  \braket{\bm{r}_1\sigma_1,\dots,\bm{r}_N\sigma_N}{\bm{r}'_1\sigma'_1,\dots,\bm{r}'_{N}\sigma'_{N}}
+  =&\frac{1}{N!} \bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_1}(\bm{r}_1)\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  =&\frac{1}{N!}\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_1}(\bm{r}_1)\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  &-\frac{1}{N!}s^n\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_2}(\bm{r}_2)\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\hat{\psi}_{\sigma_2}^\dag (\bm{r}'_2)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\hat{\psi}_{\sigma_1}(\bm{r}_1)\ket{\rm{vac}}\\
+  =&\frac{1}{N!}\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_2}(\bm{r}_2)\comm{\hat{\psi}_{\sigma_1}(\bm{r}_1)}{\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)}_{s^n}\ket{\rm{vac}}\\
+  =&\frac{1}{N!}\sum_{i_1}s^{i_1-1}\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_2}(\bm{r}_2)\\
+  &\times\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\cdots\hat{\psi}_{\sigma_{i_1-1}}^\dag(\bm{r}_{i_1-1})\comm{\hat{\psi}_{\sigma_1}(\bm{r}_1)}{\hat{\psi}_{\sigma_{i_1}}^\dag(\bm{r}_{i_1})}_s\hat{\psi}_{\sigma_{i_1+1}}^\dag(\bm{r}_{i_1+1})\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  =&\frac{1}{N!}\sum_{i_1}s^{P(i_1)}\delta(\bm{r}_1-\bm{r}'_{i_1})\delta_{\sigma_1,\sigma'_{i_1}}\\
+  &\times\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_2}(\bm{r}_2)\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\cdots\underbrace{}_{i_1}\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  =&\frac{1}{N!}\sum_{i_1\neq i_2}s^{P(i_1,i_2)}\delta(\bm{r}_1-\bm{r}'_{i_1})\delta_{\sigma_1,\sigma'_{i_1}}\delta(\bm{r}_2-\bm{r}'_{i_2})\delta_{\sigma_2,\sigma'_{i_2}}\\
+  &\times\bra{\rm{vac}}\hat{\psi}_{\sigma_N}(\bm{r}_N)\cdots\hat{\psi}_{\sigma_3}(\bm{r}_3)\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\cdots\underbrace{}_{i_1,i_2}\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}'_N)\ket{\rm{vac}}\\
+  =&\frac{1}{N!}\sum_P s^{P(i_1,\dots,i_N)}\delta(\bm{r}_1-\bm{r}'_{p_1})\delta_{\sigma_1,\sigma'_{p_1}}\cdots\delta(\bm{r}_N-\bm{r}'_{p_N})\delta_{\sigma_N,\sigma'_{p_N}}\braket{\rm{vac}}{\rm{vac}}\\
+  =&\frac{1}{N!}\sum_P s^P\delta(\bm{r}_1-\bm{r}'_{p_1})\delta_{\sigma_1,\sigma'_{p_1}}\cdots\delta(\bm{r}_N-\bm{r}'_{p_N})\delta_{\sigma_N,\sigma'_{p_N}}
+\end{align}
+交換子を用いると、計算自体は追いやすいが、なぜ$s^P$になるかを追いにくくなる。\\
+$N<N'$については
+\begin{align}
+  \braket{\bm{r}_1\sigma_1,\dots,\bm{r}_N\sigma_N}{\bm{r}'_1\sigma'_1,\dots,\bm{r}'_{N'}\sigma'_{N'}}
+  =&\frac{1}{N!}\sum_P s^P\delta(\bm{r}_1-\bm{r}'_{p_1})\delta_{\sigma_1,\sigma'_{p_1}}\cdots\delta(\bm{r}_N-\bm{r}'_{p_N})\delta_{\sigma_N,\sigma'_{p_N}}\\
+  &\times\bra{\rm{vac}}\hat{\psi}_{\sigma_1}^\dag (\bm{r}'_1)\cdots\underbrace{}_{i_1,\dots,i_N}\cdots\hat{\psi}_{\sigma_{N'}}^\dag (\bm{r}'_{N'})\ket{\rm{vac}}\\
+  =&0
+\end{align}
+$N>N'$も同様にできる。\\
+\end{document}
