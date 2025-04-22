@@ -25,13 +25,14 @@
 \usepackage{here}
 \usepackage{tikz}
 
-\title{第二量子化　計算}
+\title{note\_ver4}
 \author{Toroid153846}
 \date{\today}
 
 \begin{document}
 \maketitle
 
+\section{第二量子化}
 
   \begin{align}
     \ket{\bm{r}_1\sigma_1,\dots,\bm{r}_N\sigma_N}&=\frac{1}{\sqrt{N!}}\hat{\psi}_{\sigma_1}^\dag (\bm{r}_1)\cdots\hat{\psi}_{\sigma_N}^\dag (\bm{r}_N)\ket{\rm{vac}} \\
@@ -99,4 +100,149 @@ $N<N'$については
   =&0
 \end{align}
 $N>N'$も同様にできる。\\
+\section{摂動論}
+\subsection{縮退のある摂動論}
+\subsubsection{前提条件}
+非摂動状態のハミルトニアン$\hat{H}_0$とその直交規格化された固有状態$\ket*{\phi^{(0)}_{n,\alpha}}$と固有値$E^{(0)}_{n}$が与えられているとする。つまり、
+\begin{align}
+  \hat{H}_0\ket*{\phi^{(0)}_{n,\alpha}}=E^{(0)}_{n}\ket*{\phi^{(0)}_{n,\alpha}}\\
+  \braket*{\phi^{(0)}_{n,\alpha}}{\phi^{(0)}_{n,\alpha}}=\delta_{\alpha,\alpha'}
+\end{align}
+を満たす。\\
+摂動状態のハミルトニアン$\hat{H}=\hat{H}_0+\lambda\hat{V}$とその固有状態$\ket*{\varphi_{n,\alpha}}$と固有値$E_{n,\alpha}$とする。つまり、
+\begin{align}
+  \hat{H}\ket*{\varphi_{n,\alpha}}=E_{n,\alpha}\ket*{\varphi_{n,\alpha}}
+  \label{eq:perturbation_schrodinger_equation}
+\end{align}
+を満たす。\\
+\subsubsection{摂動論の級数展開}
+\begin{align}
+  E_{n,\alpha}=&E_n^{(0)}+\sum_{k=1}^{\infty}\lambda^kE^{(k)}_{n,\alpha}\\
+  \ket*{\varphi_{n,\alpha}}=&\sum_{k=0}^{\infty}\lambda^k\ket*{\varphi^{(k)}_{n,\alpha}}
+\end{align}
+\subsubsection{射影演算子の定義と性質}
+エネルギー固有状態$E^{(0)}_{n}$の縮退した固有状態が張る部分空間に射影する射影演算子$\hat{P}:=\sum^{N_n}_\beta\ketbra*{\phi^{(0)}_{n,\beta}}{\phi^{(0)}_{n,\beta}}$とそれ以外に射影する射影演算子$\hat{Q}:=\sum_{m(\neq n)}\sum^{N_m}_\beta\ketbra*{\phi^{(0)}_{m,\beta}}{\phi^{(0)}_{m,\beta}}=1-\hat{P}$を定義しておく。\\
+ここで、$\hat{P}\hat{H}_0\hat{Q}=\hat{Q}\hat{H}_0\hat{P}=0$と$\hat{P}\hat{P}=\hat{P},\hat{Q}\hat{Q}=\hat{Q}$を示す。\\
+任意の$\bra{\psi},\ket{\psi'}$について、$\bra{\psi}\hat{P}$はエネルギー固有状態$E^{(0)}_{n}$の縮退した固有状態が張る部分空間における状態であり、$\hat{H}_0\hat{Q}\ket{\psi'}$はエネルギー固有状態$E^{(0)}_{m}$の縮退した固有状態が張る部分空間以外における状態である。\\
+したがって、
+\begin{align}
+  \bra{\psi}\hat{P}\hat{H}_0\hat{Q}\ket{\psi'}&=0
+\end{align}
+また、同様に
+\begin{align}
+  \bra{\psi}\hat{Q}\hat{H}_0\hat{P}\ket{\psi'}&=0
+\end{align}
+が成り立つ。\\
+また、
+\begin{align}
+  \hat{P}\hat{P}=&\sum_{\beta'=1}^{N_n}\ketbra*{\phi^{(0)}_{n,\beta'}}{\phi^{(0)}_{n,\beta'}}\sum_{\beta=1}^{N_n}\ketbra*{\phi^{(0)}_{n,\beta}}{\phi^{(0)}_{n,\beta}}\\
+  =&\sum_{\beta=1}^{N_n}\sum_{\beta'=1}^{N_n}\delta_{\beta,\beta'}\ketbra*{\phi^{(0)}_{n,\beta'}}{\phi^{(0)}_{n,\beta}}\\
+  =&\sum_{\beta=1}^{N_n}\ketbra*{\phi^{(0)}_{n,\beta}}{\phi^{(0)}_{n,\beta}}\\
+  =&\hat{P}\\
+\end{align}
+さらに、
+\begin{align}
+  \hat{Q}\hat{Q}=&(\hat{1}-\hat{P})(\hat{1}-\hat{P})\\
+  =&1-2\hat{P}+\hat{P}\hat{P}\\
+  =&1-2\hat{P}+\hat{P}\\
+  =&1-\hat{P}\\
+  =&\hat{Q}\\
+\end{align}
+よって、示された。\\
+\subsubsection{射影演算子の摂動論への適用}
+これらを用いて\eqref{eq:perturbation_schrodinger_equation}式に左から$\hat{P}$をかけると、
+\begin{align}
+  \hat{P}\hat{H}\ket*{\varphi_{n,\alpha}}=&\hat{P}E_{n,\alpha}\ket*{\varphi_{n,\alpha}}\\
+  \hat{P}\left( \hat{H}_0+\lambda\hat{V} \right) \left( \hat{P}+\hat{Q} \right) \ket*{\varphi_{n,\alpha}}=&E_{n,\alpha}\hat{P}\ket*{\varphi_{n,\alpha}}\\
+  \hat{P}\hat{H}_0\hat{P}\ket*{\varphi_{n,\alpha}}+\hat{P}\hat{H}_0\hat{Q}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}=&E_{n,\alpha}\hat{P}\ket*{\varphi_{n,\alpha}}\\
+  \hat{P}\hat{H}_0\hat{P}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}=&E_{n,\alpha}\hat{P}\ket*{\varphi_{n,\alpha}}\\
+  \hat{P}\hat{H}_0\hat{P}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}=&E_{n,\alpha}\hat{P}\hat{P}\ket*{\varphi_{n,\alpha}}\\
+  \hat{P}\hat{H}_0\hat{P}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}-E_{n,\alpha}\hat{P}\hat{P}\ket*{\varphi_{n,\alpha}}=&-\lambda\hat{P}\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}\\
+  \hat{P}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{P}\ket*{\varphi_{n,\alpha}}=&-\hat{P}\lambda\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}
+  \label{eq:perturbation_p}
+\end{align}
+同様に\eqref{eq:perturbation_schrodinger_equation}式に左から$\hat{Q}$をかけると、
+\begin{align}
+  \hat{Q}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{Q}\ket*{\varphi_{n,\alpha}}=&-\hat{Q}\lambda\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}\\
+\end{align}
+が求まる。\\
+この式の両辺に左から$\hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q} $をかけると
+\begin{align}
+  \hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\hat{Q}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{Q}\ket*{\varphi_{n,\alpha}}=&-\hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\hat{Q}\lambda\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}\\
+  \hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{Q}\ket*{\varphi_{n,\alpha}}=&-\hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\lambda\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}\\
+  \hat{Q}\ket*{\varphi_{n,\alpha}}=&-\hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\lambda\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}
+  \label{eq:perturbation_q}
+\end{align}
+\eqref{eq:perturbation_q}式の2行目から3行目の変形が成り立つのは$\hat{H}$がそれぞれのエネルギー固有値$E_n^{(0)}$の部分空間を保つので(だいぶ怪しい)、任意の$\ket{\psi}$について$\hat{Q}\hat{H}\hat{Q}\ket{\psi}=\hat{H}\hat{Q}\hat{Q}\ket{\psi}=\hat{H}\hat{Q}\ket{\psi}$を満たすためである。よって、この結果を\eqref{eq:perturbation_p}式に代入すると
+\begin{align}
+  \hat{P}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{P}\ket*{\varphi_{n,\alpha}}=&-\hat{P}\lambda\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}\\
+  \hat{P}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{P}\ket*{\varphi_{n,\alpha}}=&\hat{P}\lambda\hat{V}\hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\lambda\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}\\
+  \hat{P}\left( \hat{H}_0+\lambda\hat{V}+\lambda^2\hat{V}\hat{Q}\left( E_{n,\alpha}-\hat{H}_0-\lambda \hat{V} \right)^{-1}\hat{Q}\hat{V} \right)\hat{P}\ket*{\varphi_{n,\alpha}}=&E_{n,\alpha}\hat{P}\ket*{\varphi_{n,\alpha}}
+  \label{eq:perturbation_result}
+\end{align}
+\subsubsection{摂動論の計算}
+\eqref{eq:perturbation_result}式に級数展開を代入すると
+\begin{align}
+  &\hat{P}\left( \hat{H}_0+\lambda\hat{V}+\lambda^2\hat{V}\hat{Q}\left( E_n^{(0)}+\sum_{k=1}^{\infty}\lambda^k E^{(k)}_{n,\alpha}-\hat{H}_0-\lambda \hat{V} \right)^{-1}\hat{Q}\hat{V} \right)\hat{P}\left( \sum_{k=0}^{\infty}\lambda^k\ket*{\varphi^{(k)}_{n,\alpha}} \right) \\
+  &=\left( E_n^{(0)}+\sum_{k=1}^{\infty}\lambda^kE^{(k)}_{n,\alpha} \right) \hat{P}\left( \sum_{k=0}^{\infty}\lambda^k\ket*{\varphi^{(k)}_{n,\alpha}} \right) \\
+\end{align}
+これを用いて$n$次摂動を考える。\\
+$\lambda^0$については
+\begin{align}
+  \hat{P}\hat{H}_0\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}=E_n^{(0)}\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}
+  \label{eq:perturbation_0th}
+\end{align}
+と求まる。\\
+$\lambda^1$については
+\begin{align}
+  \hat{P}\hat{H}_0\hat{P}\ket*{\varphi^{(1)}_{n,\alpha}}+\hat{P}\hat{V}\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}=&E_n^{(0)}\hat{P}\ket*{\varphi^{(1)}_{n,\alpha}}+E^{(1)}_{n,\alpha}\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}\\
+  \hat{P}\hat{V}\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}=&E^{(1)}_{n,\alpha}\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}
+  \label{eq:perturbation_1st}
+\end{align}
+1行目から2行目の変形は任意の$\ket{\psi}$について、$\hat{P}\ket{\psi}$はエネルギー固有値$E_n^{(0)}$の部分空間への射影であり、$\hat{H}_0\hat{P}\ket{\psi}=E_n^{(0)}\hat{P}\ket{\psi}$を満たし、左から$\hat{P}$をかけて$\hat{P}\hat{H}_0\hat{P}\ket{\psi}=E_n^{(0)}\hat{P}\ket{\psi}$が成り立つためである。\\
+ここで、\eqref{eq:perturbation_0th}式より$\ket*{\varphi^{(0)}_{n,\alpha}}$はエネルギー固有値$E_n^{(0)}$の部分空間における状態である。したがって、その部分空間において正規直交完全系である$\ket*{\phi^{(0)}_{n,\alpha}}$を用いて、
+\begin{align}
+  \ket*{\varphi^{(0)}_{n,\alpha}}=&\sum_{\beta=1}^{N_n}\ket*{\phi^{(0)}_{n,\beta}}\braket*{\phi^{(0)}_{n,\beta}}{\varphi^{(0)}_{n,\alpha}}\\
+  =&\sum_{\beta=1}^{N_n}c_{n,\beta;\alpha}\ket*{\phi^{(0)}_{n,\beta}}\\
+\end{align}
+と表せる。これを\eqref{eq:perturbation_1st}式に代入して
+\begin{align}
+  \hat{P}\hat{V}\hat{P}\left( \sum_{\beta=1}^{N_n}c_{n,\beta;\alpha}\ket*{\phi^{(0)}_{n,\beta}} \right) =&E^{(1)}_{n,\alpha}\hat{P}\left( \sum_{\beta=1}^{N_n}c_{n,\beta;\alpha}\ket*{\phi^{(0)}_{n,\beta}} \right) \\
+  \sum_{\beta=1}^{N_n}c_{n,\beta;\alpha}\hat{V}\ket*{\phi^{(0)}_{n,\beta}} =&\sum_{\beta=1}^{N_n}E^{(1)}_{n,\alpha}c_{n,\beta;\alpha}\ket*{\phi^{(0)}_{n,\beta}}\\
+  \sum_{\beta=1}^{N_n}c_{n,\beta;\alpha}\bra*{\phi^{(0)}_{n,\gamma}}\hat{V}\ket*{\phi^{(0)}_{n,\beta}} =&\sum_{\beta=1}^{N_n}E^{(1)}_{n,\alpha}c_{n,\beta;\alpha}\bra*{\phi^{(0)}_{n,\gamma}}\ket*{\phi^{(0)}_{n,\beta}}\\
+  \sum_{\beta=1}^{N_n}\bra*{\phi^{(0)}_{n,\gamma}}\hat{V}\ket*{\phi^{(0)}_{n,\beta}}c_{n,\beta;\alpha}=&E^{(1)}_{n,\alpha}c_{n,\gamma;\alpha}\\
+\end{align}
+これらの式により、1次の摂動エネルギーと0次の固有状態が計算できる。\\
+$\lambda^2$については
+\begin{align}
+  \hat{P}\hat{H}_0\hat{P}\ket*{\varphi^{(2)}_{n,\alpha}}+\hat{P}\hat{V}\hat{P}\ket*{\varphi^{(1)}_{n,\alpha}}+\hat{P}\hat{V}\hat{Q}\left( E_n^{(0)}-\hat{H}_0 \right)^{-1}\hat{Q}\hat{V}\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}=&E_n^{(0)}\hat{P}\ket*{\varphi^{(2)}_{n,\alpha}}+E^{(1)}_{n,\alpha}\hat{P}\ket*{\varphi^{(1)}_{n,\alpha}}+E^{(2)}_{n,\alpha}\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}\\
+  \hat{P}\hat{V}\hat{P}\ket*{\varphi^{(1)}_{n,\alpha}}+\hat{P}\hat{V}\hat{Q}\left( E_n^{(0)}-\hat{H}_0 \right)^{-1}\hat{Q}\hat{V}\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}=&E^{(1)}_{n,\alpha}\hat{P}\ket*{\varphi^{(1)}_{n,\alpha}}+E^{(2)}_{n,\alpha}\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}\\
+  \label{eq:perturbation_2nd}
+\end{align}
+1行目から2行目の変形は\label{eq:perturbation_1st}式と同様である。\\
+\subsubsection{一次摂動で縮退がとけなかった場合}
+ここからは、一次摂動において固有値がすべて縮退している場合について考える。つまり、任意の$\gamma=1,\dots,N_n$について$E_n^{(1)}:=E_{n,\gamma}^{(1)}$が成り立つとする。\\
+この場合に射影演算子は
+\begin{align}
+  \hat{P}=&\sum_{\beta=1}^{N_n}\ketbra*{\phi^{(0)}_{n,\beta}}{\phi^{(0)}_{n,\beta}}\\
+  =&\sum_{\beta=1}^{N_n}\ketbra*{\varphi^{(0)}_{n,\beta}}{\varphi^{(0)}_{n,\beta}}\\
+\end{align}
+が成り立つため
+\begin{align}
+  \hat{P}\hat{V}\hat{P}=E_n^{(1)}\hat{P}
+\end{align}
+が成り立つ。\\
+これらを用いると\eqref{eq:perturbation_2nd}式より
+\begin{align}
+  \hat{P}\hat{V}\hat{Q}\left( E_n^{(0)}-\hat{H}_0 \right)^{-1}\hat{Q}\hat{V}\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}=&E^{(2)}_{n,\alpha}\hat{P}\ket*{\varphi^{(0)}_{n,\alpha}}\\
+\end{align}
+が成り立ち、有効ハミルトニアンが
+\begin{align}
+  \hat{H}_{\text{eff}}:=\hat{P}\hat{V}\hat{Q}\left( E_n^{(0)}-\hat{H}_0 \right)^{-1}\hat{Q}\hat{V}\hat{P}
+\end{align}
+として定義される。
+
+
+
+
 \end{document}
