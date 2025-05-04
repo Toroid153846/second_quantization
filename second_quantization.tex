@@ -158,7 +158,7 @@ $N>N'$も同様にできる。\\
   \hat{P}\hat{H}_0\hat{P}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}=&E_{n,\alpha}\hat{P}\ket*{\varphi_{n,\alpha}}\\
   \hat{P}\hat{H}_0\hat{P}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}=&E_{n,\alpha}\hat{P}\hat{P}\ket*{\varphi_{n,\alpha}}\\
   \hat{P}\hat{H}_0\hat{P}\ket*{\varphi_{n,\alpha}}+\lambda\hat{P}\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}-E_{n,\alpha}\hat{P}\hat{P}\ket*{\varphi_{n,\alpha}}=&-\lambda\hat{P}\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}\\
-  \hat{P}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{P}\ket*{\varphi_{n,\alpha}}=&-\hat{P}\lambda\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}
+  \hat{P}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{P}\ket*{\varphi_{n,\alpha}}=&-\hat{P}\lambda\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}\\
   \label{eq:perturbation_p}
 \end{align}
 同様に\eqref{eq:perturbation_schrodinger_equation}式に左から$\hat{Q}$をかけると、
@@ -166,14 +166,12 @@ $N>N'$も同様にできる。\\
   \hat{Q}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{Q}\ket*{\varphi_{n,\alpha}}=&-\hat{Q}\lambda\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}\\
 \end{align}
 が求まる。\\
-この式の両辺に左から$\hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q} $をかけると
+この式の両辺に左から$Q$の部分空間における逆演算子$\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)^{-1}$($\hat{H}_0+\lambda\hat{V}-E_{n,\alpha}$の$Q$の部分空間の成分による演算子のみを取り出した演算子のインバース)をかけると
 \begin{align}
-  \hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\hat{Q}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{Q}\ket*{\varphi_{n,\alpha}}=&-\hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\hat{Q}\lambda\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}\\
-  \hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{Q}\ket*{\varphi_{n,\alpha}}=&-\hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\lambda\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}\\
   \hat{Q}\ket*{\varphi_{n,\alpha}}=&-\hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\lambda\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}
   \label{eq:perturbation_q}
 \end{align}
-\eqref{eq:perturbation_q}式の2行目から3行目の変形が成り立つのは$\hat{H}$がそれぞれのエネルギー固有値$E_n^{(0)}$の部分空間を保つので(だいぶ怪しい)、任意の$\ket{\psi}$について$\hat{Q}\hat{H}\hat{Q}\ket{\psi}=\hat{H}\hat{Q}\hat{Q}\ket{\psi}=\hat{H}\hat{Q}\ket{\psi}$を満たすためである。よって、この結果を\eqref{eq:perturbation_p}式に代入すると
+よって、この結果を\eqref{eq:perturbation_p}式に代入すると
 \begin{align}
   \hat{P}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{P}\ket*{\varphi_{n,\alpha}}=&-\hat{P}\lambda\hat{V}\hat{Q}\ket*{\varphi_{n,\alpha}}\\
   \hat{P}\left( \hat{H}_0+\lambda\hat{V}-E_{n,\alpha} \right)\hat{P}\ket*{\varphi_{n,\alpha}}=&\hat{P}\lambda\hat{V}\hat{Q}\left( \hat{H}_0+\lambda \hat{V}-E_{n,\alpha} \right)^{-1}\hat{Q}\lambda\hat{V}\hat{P}\ket*{\varphi_{n,\alpha}}\\
@@ -241,8 +239,70 @@ $\lambda^2$については
   \hat{H}_{\text{eff}}:=\hat{P}\hat{V}\hat{Q}\left( E_n^{(0)}-\hat{H}_0 \right)^{-1}\hat{Q}\hat{V}\hat{P}
 \end{align}
 として定義される。
-
-
-
-
+\section{線形応答理論}
+\subsection{久保公式の主張}
+$t=0$において非摂動ハミルトニアン$\hat{\mathcal{H}}_0$による熱平衡状態にあり、$t>0$における摂動
+\begin{align}
+  \hat{\mathcal{H}}_{\textrm{ext}}(t):=-\hat{A}X(t)
+\end{align}
+が加えられた時の線形応答の範囲における物理量$\hat{B}$の期待値の変化\\
+\begin{align}
+  \Delta B(t):=&\ev*{\hat{B}(t)}-\ev*{\hat{B}}_{eq}\\
+  =&\int^\infty_0\dd{t'}\phi_{BA}(t')X(t-t')\\
+\end{align}
+ここで、$\phi_{BA}(t)=\Tr\left[i\left[\hat{A},e^{-\beta \hat{\mathcal{H}}_0}/\Tr[e^{-\beta\hat{\mathcal{H}}_0}]\right]e^{i\hat{\mathcal{H}}_0 t}\hat{B}e^{-i\hat{\mathcal{H}}_0 t}\right]$である。\\
+\subsection{久保公式の導出}
+無摂動ハミルトニアン$\hat{\mathcal{H}}_0$のときのエネルギー固有値$E_i$の固有状態$\ket{\varphi_i(0)}$であり、ハミルトニアン$\hat{\mathcal{H}}(t)$を用いて時間発展させた状態を$\ket{\varphi_i(t)}$として、$t=0$においてカノニカル分布の密度行列演算子
+\begin{align}
+  \hat{\rho}(t):=&\sum_i\frac{e^{-\beta E_i}}{\Tr[e^{-\beta\hat{\mathcal{H}}}]}\ketbra{\varphi_i(t)}\\
+\end{align}
+密度行列演算子を用いて、$t=0$の物理量$B$の期待値
+\begin{align}
+  \Tr[\hat{\rho}(0)\hat{B}]=&\sum_i \ev{\hat{\rho}(0)\hat{B}}{\varphi_i(0)}\\
+  =&\sum_i \ev{\sum_j\frac{e^{-\beta E_j}}{\Tr[e^{-\beta\hat{\mathcal{H}}_0}]}\ketbra{\varphi_j(0)}\hat{B}}{\varphi_i(0)}\\
+  =&\sum_i \frac{e^{-\beta E_i}}{\Tr[e^{-\beta\hat{\mathcal{H}}_0}]}\ev{\hat{B}}{\varphi_i(0)}\\
+  =&\ev*{\hat{B}}_{eq}
+\end{align}
+密度行列演算子の時間発展
+\begin{align}
+  \pdv{\hat{\rho}(t)}{t}=&\sum_i\frac{e^{-\beta E_i}}{\Tr[e^{-\beta\hat{\mathcal{H}}}]}\left(\pdv{t}\left(\ket{\varphi_i(t)}\right)\bra{\varphi_i(t)}+\ket{\varphi_i(t)}\pdv{t}\left(\bra{\varphi_i(t)}\right)\right)\\
+  =&\sum_i\frac{e^{-\beta E_i}}{\Tr[e^{-\beta\hat{\mathcal{H}}}]}\left(\frac{\hat{\mathcal{H}}}{i}\ket{\varphi_i(t)}\bra{\varphi_i(t)}-\ket{\varphi_i(t)}\bra{\varphi_i(t)}\frac{\hat{\mathcal{H}}}{i}\right)\\
+  =&\frac{1}{i}[\hat{\mathcal{H}},\hat{\rho}(t)]\\
+\end{align}
+相互作用表示の状態$\ket{\psi_I(t)}:=e^{i\hat{\mathcal{H}}_0t}\ket{\psi(t)}$より相互作用表示の密度行列演算子
+\begin{align}
+  \hat{\rho}_I(t)=e^{i\hat{\mathcal{H}}_0t}\hat{\rho}(t) e^{-i\hat{\mathcal{H}}_0t}\\
+\end{align}
+相互作用表示の密度行列演算子の時間発展
+\begin{align}
+  \pdv{\hat{\rho}_I(t)}{t}=&\pdv{t}(e^{i\hat{\mathcal{H}}_0t})\hat{\rho}(t) e^{-i\hat{\mathcal{H}}_0t}+e^{i\hat{\mathcal{H}}_0t}\pdv{t}(\hat{\rho}(t)) e^{-i\hat{\mathcal{H}}_0t}+e^{i\hat{\mathcal{H}}_0t}\hat{\rho}(t) \pdv{t}(e^{-i\hat{\mathcal{H}}_0t})\\
+  =&e^{i\hat{\mathcal{H}}_0t}i\hat{\mathcal{H}}_0\hat{\rho}(t) e^{-i\hat{\mathcal{H}}_0t}+e^{i\hat{\mathcal{H}}_0t}\pdv{t}(\hat{\rho}(t)) e^{-i\hat{\mathcal{H}}_0t}+e^{i\hat{\mathcal{H}}_0t}\hat{\rho}(t) (-i\hat{\mathcal{H}}_0)e^{-i\hat{\mathcal{H}}_0t}\\
+  =&e^{i\hat{\mathcal{H}}_0t}\frac{1}{i}[\hat{\mathcal{H}},\hat{\rho}(t)]e^{-i\hat{\mathcal{H}}_0t}-e^{i\hat{\mathcal{H}}_0t}\frac{1}{i}[\hat{\mathcal{H}}_0,\hat{\rho}(t)]e^{-i\hat{\mathcal{H}}_0t}\\
+  =&e^{i\hat{\mathcal{H}}_0t}\frac{1}{i}[\hat{\mathcal{H}}_{\textrm{ext}}(t),\hat{\rho}(t)]e^{-i\hat{\mathcal{H}}_0t}
+\end{align}
+これを積分して
+\begin{align}
+  \hat{\rho}_I(t)=&\hat{\rho}_I(0)+\int_0^t\dd{t'}\pdv{\hat{\rho}_I(t')}{t}\\
+  =&\hat{\rho}_I(0)+\int_0^t\dd{t'}e^{i\hat{\mathcal{H}}_0t'}\frac{1}{i}[\hat{\mathcal{H}}_{\textrm{ext}}(t'),\hat{\rho}(t')]e^{-i\hat{\mathcal{H}}_0t'}\\
+\end{align}
+Schrodinger表示に直して
+\begin{align}
+  \hat{\rho}(t)=&e^{-i\hat{\mathcal{H}}_0t}\hat{\rho}_I(t)e^{i\hat{\mathcal{H}}_0t}\\
+  =&e^{-i\hat{\mathcal{H}}_0t}\hat{\rho}(0)e^{i\hat{\mathcal{H}}_0t}+\int_0^t\dd{t'}e^{-i\hat{\mathcal{H}}_0(t-t')}\frac{1}{i}[\hat{\mathcal{H}}_{\textrm{ext}}(t'),\hat{\rho}(t')]e^{i\hat{\mathcal{H}}_0(t-t')}\\
+  =&\hat{\rho}(0)+\int_0^t\dd{t'}e^{-i\hat{\mathcal{H}}_0(t-t')}\frac{1}{i}[\hat{\mathcal{H}}_{\textrm{ext}}(t'),\hat{\rho}(t')]e^{i\hat{\mathcal{H}}_0(t-t')}\\
+  =&\hat{\rho}(0)+\int_0^t\dd{t'}e^{-i\hat{\mathcal{H}}_0(t-t')}\frac{1}{i}[\hat{\mathcal{H}}_{\textrm{ext}}(t'),\hat{\rho}(0)]e^{i\hat{\mathcal{H}}_0(t-t')}+\order{X^2}\\
+\end{align}
+この期待値を計算して
+\begin{align}
+  \ev*{\hat{B}(t)}=&\Tr[\hat{\rho}(t)\hat{B}]\\
+  =&\Tr[\hat{\rho}(0)\hat{B}]+\int_0^t\dd{t'}\Tr\left[e^{-i\hat{\mathcal{H}}_0(t-t')}\frac{1}{i}[\hat{\mathcal{H}}_{\textrm{ext}}(t'),\hat{\rho}(0)]e^{i\hat{\mathcal{H}}_0(t-t')}\hat{B}\right]\\
+  =&\ev*{\hat{B}}_{eq}+\int_0^t\dd{t'}X(t')\Tr\left[e^{-i\hat{\mathcal{H}}_0(t-t')}i[\hat{A},\hat{\rho}(0)]e^{i\hat{\mathcal{H}}_0(t-t')}\hat{B}\right]\\
+  =&\ev*{\hat{B}}_{eq}+\int_0^t\dd{t'}X(t')\Tr\left[i[\hat{A},\hat{\rho}(0)]e^{i\hat{\mathcal{H}}_0(t-t')}\hat{B}e^{-i\hat{\mathcal{H}}_0(t-t')}\right]\\
+  =&\ev*{\hat{B}}_{eq}+\int_0^t\dd{t'}\phi_{BA}(t-t')X(t')\\
+\end{align}
+よって、
+\begin{align}
+  \Delta B(t)=&\int^\infty_0\dd{t'}\phi_{BA}(t')X(t-t')\\
+\end{align}
+が示された。
 \end{document}
