@@ -250,7 +250,7 @@ $t=0$において非摂動ハミルトニアン$\hat{H}_0$による熱平衡状�
   \Delta B(t):=&\ev*{\hat{B}(t)}-\ev*{\hat{B}}_{eq}\\
   =&\int^\infty_0\dd{t'}\phi_{BA}(t')X(t-t')\\
 \end{align}
-ここで、$\phi_{BA}(t)=\Tr\left[i\left[\hat{A},e^{-\beta \hat{H}_0}/\Tr[e^{-\beta\hat{H}_0}]\right]e^{i\hat{H}_0 t}\hat{B}e^{-i\hat{H}_0 t}\right]$である。\\
+ここで、$\phi_{BA}(t)=i\ev*{[\hat{B}(t'),\hat{A}]}_{\textrm{eq}}$である。\\
 \subsection{久保公式の導出}
 無摂動ハミルトニアン$\hat{H}_0$のときのエネルギー固有値$E_i$の固有状態$\ket{\varphi_i(0)}$であり、ハミルトニアン$\hat{H}(t)$を用いて時間発展させた状態を$\ket{\varphi_i(t)}$として、$t=0$においてカノニカル分布の密度行列演算子
 \begin{align}
@@ -285,7 +285,7 @@ $t=0$において非摂動ハミルトニアン$\hat{H}_0$による熱平衡状�
   \hat{\rho}_I(t)=&\hat{\rho}_I(0)+\int_0^t\dd{t'}\pdv{\hat{\rho}_I(t')}{t}\\
   =&\hat{\rho}_I(0)+\int_0^t\dd{t'}e^{i\hat{H}_0t'}\frac{1}{i}[\hat{H}_{\textrm{ext}}(t'),\hat{\rho}(t')]e^{-i\hat{H}_0t'}\\
 \end{align}
-Schrodinger表示に直して
+Schrödinger表示に直して
 \begin{align}
   \hat{\rho}(t)=&e^{-i\hat{H}_0t}\hat{\rho}_I(t)e^{i\hat{H}_0t}\\
   =&e^{-i\hat{H}_0t}\hat{\rho}(0)e^{i\hat{H}_0t}+\int_0^t\dd{t'}e^{-i\hat{H}_0(t-t')}\frac{1}{i}[\hat{H}_{\textrm{ext}}(t'),\hat{\rho}(t')]e^{i\hat{H}_0(t-t')}\\
@@ -297,8 +297,16 @@ Schrodinger表示に直して
   \ev*{\hat{B}(t)}=&\Tr[\hat{\rho}(t)\hat{B}]\\
   =&\Tr[\hat{\rho}(0)\hat{B}]+\int_0^t\dd{t'}\Tr\left[e^{-i\hat{H}_0(t-t')}\frac{1}{i}[\hat{H}_{\textrm{ext}}(t'),\hat{\rho}(0)]e^{i\hat{H}_0(t-t')}\hat{B}\right]\\
   =&\ev*{\hat{B}}_{eq}+\int_0^t\dd{t'}X(t')\Tr\left[e^{-i\hat{H}_0(t-t')}i[\hat{A},\hat{\rho}(0)]e^{i\hat{H}_0(t-t')}\hat{B}\right]\\
-  =&\ev*{\hat{B}}_{eq}+\int_0^t\dd{t'}X(t')\Tr\left[i[\hat{A},\hat{\rho}(0)]e^{i\hat{H}_0(t-t')}\hat{B}e^{-i\hat{H}_0(t-t')}\right]\\
-  =&\ev*{\hat{B}}_{eq}+\int_0^t\dd{t'}\phi_{BA}(t-t')X(t')\\
+  =&\ev*{\hat{B}}_{eq}+\int_0^t\dd{t'}X(t')\Tr\left[i[\hat{A},\hat{\rho}(0)]\hat{B}(t-t')\right]\\
+  =&\ev*{\hat{B}}_{eq}+\int_0^t\dd{t'}X(t-t')\Tr\left[i[\hat{A},\hat{\rho}(0)]\hat{B}(t')\right]\\
+\end{align}
+ここで、
+\begin{align}
+  \Tr\left[i[\hat{A},\hat{\rho}(0)]\hat{B}(t')\right]
+  =&\Tr\left[i\hat{A}\hat{\rho}(0)\hat{B}(t')\right]-\Tr\left[i\hat{\rho}(0)\hat{A}\hat{B}(t')\right]\\
+  =&\Tr\left[i\hat{\rho}(0)\hat{B}(t')\hat{A}\right]-\Tr\left[i\hat{\rho}(0)\hat{A}\hat{B}(t')\right]\\
+  =&\Tr\left[i\hat{\rho}(0)[\hat{B}(t'),\hat{A}]\right]\\
+  =&i\ev*{[\hat{B}(t'),\hat{A}]}_{\textrm{eq}}
 \end{align}
 よって、
 \begin{align}
